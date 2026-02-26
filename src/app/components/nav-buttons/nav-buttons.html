@@ -1,7 +1,7 @@
 <mat-nav-list>
   @for (button of buttons; track button) {
-  <a mat-list-item (click)="select(button)" [activated]="activeFilter() === button">
-    {{ button }}
+  <a mat-list-item (click)="select(button)" [activated]="activeFilter() === button" class="nav-button">
+      <mat-icon matListItemIcon>{{ filterIcons[button] }}</mat-icon> <span matListItemTitle>{{ button }}</span>
   </a>
   }
 </mat-nav-list>
