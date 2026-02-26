@@ -4,10 +4,12 @@
     </button>
     <span>To Do List</span>
     <span class="example-spacer"></span>
-    <button mat-icon-button (click)="openModal.emit('open')">
+    <button matButton="filled"(click)="openModal.emit('open')">
         <mat-icon>add</mat-icon>
+        Add To-do
     </button>
-    <button matIconButton aria-hidden="true" (click)="theme.toggle()">
+    
+    <button matButton="filled" aria-hidden="true" (click)="theme.toggle()" style="margin-left: 12px; padding-right: 10px">
         <mat-icon>{{ theme.isDark() ? 'light_mode' : 'dark_mode' }}</mat-icon>
     </button>
 </mat-toolbar>
