@@ -1,6 +1,6 @@
 import { Component, inject, output } from '@angular/core';
 import { MatListModule } from '@angular/material/list';
-import { TodoStore } from '../../todo-store';
+import { TodoStore } from '../../services/todo-store.service';
 
 export type Filter = 'All' | 'Open' | 'Completed';
 

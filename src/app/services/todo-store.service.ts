@@ -10,9 +10,7 @@ export type Filter = 'All' | 'Open' | 'Completed';
 
 
 const TODO_DATA: Todo[] = [
-  { id: crypto.randomUUID(), input: 'Do the laundry', completed: true },
-  { id: crypto.randomUUID(), input: 'Go to the gym', completed: true },
-  { id: crypto.randomUUID(), input: 'Do 20 pushups', completed: false },
+  { id: crypto.randomUUID(), input: 'Nothing to do yet', completed: true },
 ];
 
 @Injectable({

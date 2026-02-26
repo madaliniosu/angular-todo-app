@@ -5,7 +5,7 @@ import { Toolbar } from './components/toolbar/toolbar';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { AddTodo } from './components/add-todo/add-todo';
 import { MatDialog } from '@angular/material/dialog';
-import { TodoStore } from './todo-store';
+import { TodoStore } from './services/todo-store.service';
 
 @Component({
   selector: 'app-root',

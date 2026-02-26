@@ -7,7 +7,7 @@
     <button mat-icon-button (click)="openModal.emit('open')">
         <mat-icon>add</mat-icon>
     </button>
-    <button matIconButton aria-label="Example icon-button with heart icon">
-        <mat-icon>bedtime</mat-icon>
+    <button matIconButton aria-hidden="true" (click)="theme.toggle()">
+        <mat-icon>{{ theme.isDark() ? 'light_mode' : 'dark_mode' }}</mat-icon>
     </button>
 </mat-toolbar>

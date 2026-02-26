@@ -1,7 +1,7 @@
 import { Component, inject, input, ViewChild } from '@angular/core';
 import { MatTable, MatTableModule } from '@angular/material/table';
-import { TodoStore } from '../../todo-store';
-import { Todo } from '../../todo-store';
+import { TodoStore } from '../../services/todo-store.service';
+import { Todo } from '../../services/todo-store.service';
 import { CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray } from '@angular/cdk/drag-drop';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatIconModule } from '@angular/material/icon';

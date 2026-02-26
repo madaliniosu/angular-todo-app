@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { SidenavToggle } from '../../services/sidenav-toggle.service';
 import { AddTodo } from '../add-todo/add-todo';
 import { MatDialog } from '@angular/material/dialog';
+import { ThemeService } from '../../services/theme.service';
 
 
 @Component({
@@ -15,20 +16,8 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class Toolbar {
   sidenavToggle = inject(SidenavToggle);
+  theme = inject(ThemeService);
   openModal = output<string>();
 
-  // constructor(private dialog: MatDialog) { }
 
-  // openAddTodoDialog() {
-  //   const dialogRef = this.dialog.open(AddTodo, {
-  //     width: '600px',
-  //   });
-
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     if (result) {
-  //       console.log('New todo name:', result); // result is whatever you passed to close()
-  //       this.newTodo.emit(result);
-  //     }
-  //   });
-  // }
 }
