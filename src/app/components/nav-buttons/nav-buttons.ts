@@ -1,5 +1,6 @@
-import { Component, output } from '@angular/core';
+import { Component, inject, output } from '@angular/core';
 import { MatListModule } from '@angular/material/list';
+import { TodoStore } from '../../todo-store';
 
 export type Filter = 'All' | 'Open' | 'Completed';
 
@@ -10,13 +11,13 @@ export type Filter = 'All' | 'Open' | 'Completed';
   styleUrl: './nav-buttons.css',
 })
 export class NavButtons {
-  buttons = ['All', 'Open', 'Completed'];
+  private store = inject(TodoStore);
 
-  filterChange = output<Filter>();
-  activeFilter: Filter = 'All';
+  buttons: Filter[] = ['All', 'Open', 'Completed'];
 
-  select(button: string) {
-    this.activeFilter = button as Filter;
-    this.filterChange.emit(button as Filter);
+  activeFilter = this.store.filter; // reactive binding
+
+  select(button: Filter) {
+    this.store.setFilter(button);
   }
 }

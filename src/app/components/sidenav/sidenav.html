@@ -1,12 +1,12 @@
 <mat-sidenav-container>
     <mat-sidenav #sidenav mode="side" [opened]="sidenavToggle.isOpen()">
-        <app-nav-buttons (filterChange)="activeFilter = $event"></app-nav-buttons>
+        <app-nav-buttons ></app-nav-buttons>
     </mat-sidenav>
 
     <mat-sidenav-content>
         <div class="sidenav-filler-content-outer">
             <div class="sidenav-filler-content-inner">
-                <app-todo-table [dataSource]="filteredData"></app-todo-table>
+                <app-todo-table></app-todo-table>
             </div>
         </div>
     </mat-sidenav-content>

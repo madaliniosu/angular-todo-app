@@ -1,0 +1,10 @@
+    <h2 mat-dialog-title>Add Todo</h2>
+    <mat-dialog-content>
+      <mat-form-field>
+        <textarea matInput placeholder="What are you planning to do?" (ngModel)]="todo" ></textarea>
+      </mat-form-field>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-button (click)="cancel()">Cancel</button>
+      <button mat-button (click)="confirm()">Add</button>
+    </mat-dialog-actions>
