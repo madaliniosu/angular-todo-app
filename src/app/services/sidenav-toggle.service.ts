@@ -27,6 +27,7 @@ export class SidenavToggle implements OnDestroy{
         //  on mobile
         if (screenSize.matches) {
           this._isCollapsed.set(false);
+          this._isOpen.set(false);
           // not on mobile
         } else {
           this._isCollapsed.set(false)
