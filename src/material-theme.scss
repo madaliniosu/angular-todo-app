@@ -12,6 +12,22 @@
 :root {
   @include mat.table-overrides((background-color: var(--mat-sys-on-secondary),
     ));
+
+  .error {
+    @include mat.button-overrides((filled-container-color: var(--mat-sys-error),
+      ));
+  }
+
+  // .delete-todo {
+  //   @include mat.button-overrides(( // filled-container-color: gba(0, 0, 0, 0),
+  //       filled-hover-state-layer-opacity: 0.8,
+  //     ));
+  // }
+
+  .delete-todo{
+    @include mat.icon-overrides((color: var(--mat-sys-error),
+      ));
+  }
 }
 
 html,
@@ -25,8 +41,7 @@ html {
   @include mat.theme((color: (primary: mat.$azure-palette,
         tertiary: mat.$blue-palette,
       ),
-      typography: Roboto,s
-      density: 0,
+      typography: Roboto, s density: 0,
     ));
 
 }
@@ -54,7 +69,7 @@ h2 {
   padding: 1rem;
 }
 
-.example-spacer {
+.spacer {
   flex: 1 1 auto;
 }
 
@@ -78,11 +93,11 @@ h2 {
 
 
 
-mat-nav-list { 
+mat-nav-list {
   margin-left: 1rem !important;
 
   &.collapsed {
-    width: 56px; 
+    width: 56px;
 
     .nav-label {
       display: none;

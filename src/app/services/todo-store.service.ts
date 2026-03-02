@@ -1,4 +1,5 @@
-import { computed, Injectable, signal } from '@angular/core';
+import { moveItemInArray } from '@angular/cdk/drag-drop';
+import { computed, Injectable, signal, effect } from '@angular/core';
 
 export interface Todo {
   id: string,
@@ -6,8 +7,14 @@ export interface Todo {
   completed: boolean;
 }
 
+const STORAGE_KEY = 'todos';
+
 export type Filter = 'All' | 'Open' | 'Completed';
 
+function loadTodos(): Todo[] {
+  const stored = localStorage.getItem(STORAGE_KEY);
+  return stored ? JSON.parse(stored) : [...TODO_DATA];
+}
 
 const TODO_DATA: Todo[] = [
   { id: crypto.randomUUID(), input: 'Nothing to do yet', completed: true },
@@ -17,11 +24,11 @@ const TODO_DATA: Todo[] = [
   providedIn: 'root',
 })
 export class TodoStore {
-   // -----------------------
+  // -----------------------
   // STATE
   // -----------------------
 
-  private readonly _todos = signal<Todo[]>([...TODO_DATA]);
+  private readonly _todos = signal<Todo[]>(loadTodos());
   private readonly _filter = signal<Filter>('All');
 
   readonly todos = this._todos.asReadonly();
@@ -55,6 +62,12 @@ export class TodoStore {
     this._todos().filter(t => !t.completed).length
   );
 
+  constructor() {
+    effect(() => {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(this._todos()));
+    });
+  }
+
   // -----------------------
   // FILTER
   // -----------------------
@@ -68,46 +81,35 @@ export class TodoStore {
   // -----------------------
 
   add(input: string) {
-    this._todos.update(current => [
-      ...current,
-      {
-        id: crypto.randomUUID(),
-        input,
-        completed: false
-      }
-    ]);
+    this._todos.update(current => {
+      const updated = [...current, { id: crypto.randomUUID(), input, completed: false }];
+      return updated;
+    });
   }
 
   delete(id: string) {
-    this._todos.update(current =>
-      current.filter(todo => todo.id !== id)
-    );
-  }
-
-  edit(id: string, newInput: string) {
-    this._todos.update(current =>
-      current.map(todo =>
-        todo.id === id
-          ? { ...todo, input: newInput }
-          : todo
-      )
-    );
+    this._todos.update(current => {
+      const updated = current.filter(todo => todo.id !== id);
+      return updated;
+    });
   }
 
   toggle(id: string) {
-    this._todos.update(current =>
-      current.map(todo =>
-        todo.id === id
-          ? { ...todo, completed: !todo.completed }
-          : todo
-      )
-    );
+    this._todos.update(current => {
+      const updated = current.map(todo =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      );
+      return updated;
+    });
   }
 
-  clearCompleted() {
-    this._todos.update(current =>
-      current.filter(todo => !todo.completed)
-    );
-  }
+  reorder(previousIndex: number, currentIndex: number) {
+  this._todos.update(current => {
+    const updated = [...current];
+    moveItemInArray(updated, previousIndex, currentIndex);
+    return updated;
+  });
+}
+
 
 }

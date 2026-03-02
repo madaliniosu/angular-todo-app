@@ -2,14 +2,15 @@ import { Component, inject, input, ViewChild } from '@angular/core';
 import { MatTable, MatTableModule } from '@angular/material/table';
 import { TodoStore } from '../../services/todo-store.service';
 import { Todo } from '../../services/todo-store.service';
-import { CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @Component({
   selector: 'app-todo-table',
-  imports: [MatTableModule, DragDropModule, MatIconModule],
+  imports: [MatTableModule, DragDropModule, MatIconModule, MatButtonModule],
   templateUrl: './todo-table.html',
   styleUrl: './todo-table.css',
 })
@@ -19,7 +20,7 @@ export class TodoTable {
 
   dataSource = this.store.filteredTodos
 
-  displayedColumns: string[] = ['position', 'input', 'completed'];
+  displayedColumns: string[] = ['position', 'input', 'completed', 'delete'];
 
   toggle(id: string) {
     this.store.toggle(id);
@@ -29,20 +30,15 @@ export class TodoTable {
     this.store.delete(id);
   }
 
-  edit(id: string, value: string) {
-    this.store.edit(id, value);
-  }
-
   trackById(index: number, item: Todo) {
     return item.id;
   }
-
+  
   drop(event: CdkDragDrop<string>) {
-    const previousIndex = this.dataSource().findIndex(d => d === event.item.data);
-    console.log('dropping')
-    moveItemInArray(this.dataSource(), previousIndex, event.currentIndex);
+    const draggedTodo = event.item.data as Todo;
+    const allTodos = this.store.todos(); // full unfiltered list
+    const previousIndex = allTodos.findIndex(d => d.id === draggedTodo.id);
+    this.store.reorder(previousIndex, event.currentIndex);
     this.table.renderRows();
   }
-
-
 }

@@ -1,5 +1,5 @@
-<table #table mat-table [dataSource]="dataSource()" class="mat-elevation-z8" cdkDropList (cdkDropListDropped)="drop($event)"
-    cdkDropListData="dataSource">
+<table #table mat-table [dataSource]="dataSource()" class="mat-elevation-z8" cdkDropList
+    (cdkDropListDropped)="drop($event)" cdkDropListData="dataSource">
 
     <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
@@ -28,7 +28,23 @@
     <!-- Completed Column -->
     <ng-container matColumnDef="completed">
         <th mat-header-cell *matHeaderCellDef> Completed </th>
-        <td mat-cell *matCellDef="let todo"> {{todo.completed ? '✅' : '❌'}} </td>
+        <td mat-cell *matCellDef="let todo">
+            <button matButton="filled" (click)="toggle(todo.id)" [class.success]="todo.completed"
+                [class.error]="!todo.completed">
+                {{todo.completed? 'Done' : 'To do'}}
+            </button>
+        </td>
+    </ng-container>
+
+    <!-- Delete Column -->
+
+    <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef> Delete</th>
+        <td mat-cell *matCellDef="let todo">
+            <button matButton class="delete-todo" (click)="delete(todo.id)" style="padding-left: -4px; padding-right: 6px;">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
