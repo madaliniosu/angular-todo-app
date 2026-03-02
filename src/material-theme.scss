@@ -76,7 +76,21 @@ h2 {
   cursor: move;
 }
 
-// .mdc-list-item__content{
-//   background-color: red !important;
-//   justify-content: center !important;
-// }
+
+
+mat-nav-list { 
+  margin-left: 1rem !important;
+
+  &.collapsed {
+    width: 56px; 
+
+    .nav-label {
+      display: none;
+    }
+
+    // remove the extra padding mat-list-item adds for text
+    ::ng-deep .mdc-list-item__content {
+      padding: 0;
+    }
+  }
+}

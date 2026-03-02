@@ -6,6 +6,7 @@ import { SidenavToggle } from '../../services/sidenav-toggle.service';
 import { AddTodo } from '../add-todo/add-todo';
 import { MatDialog } from '@angular/material/dialog';
 import { ThemeService } from '../../services/theme.service';
+import { MatSidenav } from '@angular/material/sidenav';
 
 
 @Component({
@@ -18,6 +19,4 @@ export class Toolbar {
   sidenavToggle = inject(SidenavToggle);
   theme = inject(ThemeService);
   openModal = output<string>();
-
-
 }

@@ -1,5 +1,5 @@
-<mat-sidenav-container>
-    <mat-sidenav #sidenav mode="side" [opened]="sidenavToggle.isOpen()">
+<mat-sidenav-container autosize>
+    <mat-sidenav #sidenav [style.width]="sidenavToggle.isCollapsed() ? '80px' : ''" [mode]="sidenavToggle.isMobile() ? 'over' : 'side'" [opened]="sidenavToggle.isMobile() ? sidenavToggle.isOpen() : 'true'">
         <app-nav-buttons ></app-nav-buttons>
     </mat-sidenav>
 

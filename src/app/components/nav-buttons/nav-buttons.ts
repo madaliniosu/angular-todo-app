@@ -2,6 +2,7 @@ import { Component, inject, output } from '@angular/core';
 import { MatListModule } from '@angular/material/list';
 import { TodoStore } from '../../services/todo-store.service';
 import { MatIconModule } from '@angular/material/icon';
+import { SidenavToggle } from '../../services/sidenav-toggle.service';
 
 export type Filter = 'All' | 'Open' | 'Completed';
 
@@ -13,13 +14,15 @@ export type Filter = 'All' | 'Open' | 'Completed';
 })
 export class NavButtons {
   private store = inject(TodoStore);
-  activeFilter = this.store.filter; 
-  buttons: Filter[] = ['All', 'Open', 'Completed'];
+  private sidenavToggle = inject(SidenavToggle)
+  readonly activeFilter = this.store.filter;
+  readonly buttons: Filter[] = ['All', 'Open', 'Completed'];
   readonly filterIcons: Record<string, string> = {
-  'All': 'language',
-  'Open': 'rowing',
-  'Completed': 'done_all'
-};
+    'All': 'language',
+    'Open': 'rowing',
+    'Completed': 'done_all'
+  };
+  readonly isCollapsed= this.sidenavToggle.isCollapsed
 
   select(button: Filter) {
     this.store.setFilter(button);

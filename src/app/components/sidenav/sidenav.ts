@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -9,7 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { SidenavToggle } from '../../services/sidenav-toggle.service';
 import { MatListModule } from '@angular/material/list';
 import { TodoTable } from '../todo-table/todo-table';
-import { NavButtons, Filter } from '../nav-buttons/nav-buttons';
+import { NavButtons } from '../nav-buttons/nav-buttons';
 
 
 @Component({

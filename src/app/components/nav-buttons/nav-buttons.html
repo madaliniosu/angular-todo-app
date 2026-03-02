@@ -1,7 +1,8 @@
-<mat-nav-list>
+<mat-nav-list [class.collapsed]="isCollapsed()">
   @for (button of buttons; track button) {
   <a mat-list-item (click)="select(button)" [activated]="activeFilter() === button" class="nav-button">
-      <mat-icon matListItemIcon>{{ filterIcons[button] }}</mat-icon> <span matListItemTitle>{{ button }}</span>
+    <mat-icon matListItemIcon>{{ filterIcons[button] }}</mat-icon>
+    <span matListItemTitle class="nav-label">{{ button }}</span>
   </a>
   }
 </mat-nav-list>
